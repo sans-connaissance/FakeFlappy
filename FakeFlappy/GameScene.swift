@@ -62,7 +62,13 @@ class GameScene: SKScene {
         
         if touchingScreen {
             player.physicsBody?.velocity = CGVector(dx: 0, dy: 300)
+
         }
+        //rotate player
+        let value = player.physicsBody!.velocity.dy * 0.001
+        let rotate = SKAction.rotate(toAngle: value, duration: 0.1)
+        player.run(rotate)
+        
         
     }
 }
