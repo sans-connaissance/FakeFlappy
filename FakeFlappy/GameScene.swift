@@ -10,10 +10,11 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-
+    let player = SKSpriteNode(imageNamed: "plane")
     
     override func didMove(to view: SKView) {
-        
+        player.position = CGPoint(x: -400, y: 250)
+        addChild(player)
 
     }
     
