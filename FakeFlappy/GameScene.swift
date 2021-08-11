@@ -13,6 +13,12 @@ class GameScene: SKScene {
     let player = SKSpriteNode(imageNamed: "plane")
     
     override func didMove(to view: SKView) {
+        //add gravity to the GameScene node
+        physicsWorld.gravity = CGVector(dx: 0, dy: -5)
+        //give the player a physics body using it's image texture
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.texture!.size())
+        
+        
         player.position = CGPoint(x: -400, y: 250)
         addChild(player)
 
