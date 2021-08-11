@@ -12,8 +12,12 @@ class GameScene: SKScene {
     
     let player = SKSpriteNode(imageNamed: "plane")
     var touchingScreen = false
+    var timer: Timer?
     
     override func didMove(to view: SKView) {
+       
+        timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(createObstacle), userInfo: nil, repeats: true)
+        
         //add gravity to the GameScene node
         physicsWorld.gravity = CGVector(dx: 0, dy: -5)
         //give the player a physics body using it's image texture
@@ -98,6 +102,21 @@ class GameScene: SKScene {
             node.run(forever)
         }
         
+    }
+    
+    @objc func createObstacle() {
+        // create and position the bird
+        let obstacle = SKSpriteNode(imageNamed: "enemy-bird")
+        obstacle.zPosition = -2
+        obstacle.position.x = 768
+        addChild(obstacle)
+        
+        // decide where to create it
+        obstacle.position.y = CGFloat.random(in: -300..<350)
+        
+        // make it move across the screen
+        let action = SKAction.moveTo(x: -786, duration: 6)
+        obstacle.run(action)
     }
     
 }
