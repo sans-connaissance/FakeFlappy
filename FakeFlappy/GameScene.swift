@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let player = SKSpriteNode(imageNamed: "plane")
     var touchingScreen = false
@@ -16,6 +16,9 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
        
+        //this is the reference that begins physics collision detection
+        physicsWorld.contactDelegate = self
+        
         timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(createObstacle), userInfo: nil, repeats: true)
         
         //add gravity to the GameScene node
@@ -25,6 +28,9 @@ class GameScene: SKScene {
         
         
         player.position = CGPoint(x: -400, y: 250)
+        
+        player.physicsBody?.categoryBitMask = 1
+        
         addChild(player)
         
         parallaxScroll(image: "sky", y: 0, z: -3, duration: 10, needsPhysics: false)
@@ -134,6 +140,23 @@ class GameScene: SKScene {
         // make it move across the screen
         let action = SKAction.moveTo(x: -786, duration: 6)
         obstacle.run(action)
+    }
+    
+    func playerHit(_ node: SKNode) {
+        if node.name == "obstacle" {
+            player.removeFromParent()
+        }
+    }
+    // this is required for the collision detection and physicsWorld stuff above
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+        
+        if nodeA == player {
+            playerHit(nodeB)
+        } else if nodeB == player {
+            playerHit(nodeA)
+        }
     }
     
 }
