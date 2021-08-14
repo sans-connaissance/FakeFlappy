@@ -144,6 +144,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func playerHit(_ node: SKNode) {
         if node.name == "obstacle" {
+            
+            if let explosion = SKEmitterNode(fileNamed: "PlayerExplosion") {
+                explosion.position = player.position
+                addChild(explosion)
+            }
             player.removeFromParent()
         }
     }
