@@ -88,6 +88,16 @@ class GameScene: SKScene {
             node.zPosition = z
             addChild(node)
             
+            //collision detection
+            if needsPhysics {
+                node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.texture!.size())
+                node.physicsBody?.isDynamic = false
+                node.physicsBody?.contactTestBitMask = 1
+                node.name = "obstacle"
+            }
+            
+            
+            
             // make this node move the width of the screen by whatever duration was passed in
             let move = SKAction.moveBy(x: -1024, y: 0, duration: duration)
             
@@ -110,6 +120,13 @@ class GameScene: SKScene {
         obstacle.zPosition = -2
         obstacle.position.x = 768
         addChild(obstacle)
+        
+        
+        //collision detection
+        obstacle.physicsBody = SKPhysicsBody(texture: obstacle.texture!, size: obstacle.texture!.size())
+        obstacle.physicsBody?.isDynamic = false
+        obstacle.physicsBody?.contactTestBitMask = 1
+        obstacle.name = "obstacle"
         
         // decide where to create it
         obstacle.position.y = CGFloat.random(in: -300..<350)
