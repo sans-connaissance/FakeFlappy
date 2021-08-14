@@ -191,6 +191,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             run(SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false))
             music.removeFromParent()
+            // wait for two seconds then run some code
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                // create a new scene from GameScene.sks
+                if let scene = GameScene(fileNamed: "GameScene") {
+                    // make it stretch to fill all available space
+                    scene.scaleMode = .aspectFill
+                    
+                    // present it immediately
+                    self.view?.presentScene(scene)
+                }
+            }
+            
+            
             player.removeFromParent()
         } else if node.name == "score" {
             run(SKAction.playSoundFileNamed("score.wav", waitForCompletion: false))
