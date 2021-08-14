@@ -15,6 +15,9 @@
 		414EA8C226C330EE00602F0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 414EA8C026C330EE00602F0D /* Main.storyboard */; };
 		414EA8C426C330F000602F0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 414EA8C326C330F000602F0D /* Assets.xcassets */; };
 		415BCDEB26C75EFA0052AF50 /* PlayerExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 415BCDEA26C75EFA0052AF50 /* PlayerExplosion.sks */; };
+		415BCDED26C7F2220052AF50 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 415BCDEC26C7F2220052AF50 /* explosion.wav */; };
+		415BCDEF26C809570052AF50 /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = 415BCDEE26C809570052AF50 /* score.wav */; };
+		415BCDF126C809D80052AF50 /* the-hero.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 415BCDF026C809D80052AF50 /* the-hero.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		414EA8C326C330F000602F0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		414EA8C526C330F000602F0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		415BCDEA26C75EFA0052AF50 /* PlayerExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerExplosion.sks; sourceTree = "<group>"; };
+		415BCDEC26C7F2220052AF50 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		415BCDEE26C809570052AF50 /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
+		415BCDF026C809D80052AF50 /* the-hero.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "the-hero.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 		414EA8B526C330EE00602F0D /* FakeFlappy */ = {
 			isa = PBXGroup;
 			children = (
+				415BCDF026C809D80052AF50 /* the-hero.mp3 */,
+				415BCDEC26C7F2220052AF50 /* explosion.wav */,
+				415BCDEE26C809570052AF50 /* score.wav */,
 				414EA8B626C330EE00602F0D /* AppDelegate.swift */,
 				414EA8B826C330EE00602F0D /* GameScene.sks */,
 				414EA8BA26C330EE00602F0D /* Actions.sks */,
@@ -130,10 +139,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				415BCDED26C7F2220052AF50 /* explosion.wav in Resources */,
 				414EA8C226C330EE00602F0D /* Main.storyboard in Resources */,
+				415BCDEF26C809570052AF50 /* score.wav in Resources */,
 				414EA8B926C330EE00602F0D /* GameScene.sks in Resources */,
 				414EA8C426C330F000602F0D /* Assets.xcassets in Resources */,
 				415BCDEB26C75EFA0052AF50 /* PlayerExplosion.sks in Resources */,
+				415BCDF126C809D80052AF50 /* the-hero.mp3 in Resources */,
 				414EA8BB26C330EE00602F0D /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

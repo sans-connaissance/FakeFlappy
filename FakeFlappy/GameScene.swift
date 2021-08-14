@@ -13,6 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let player = SKSpriteNode(imageNamed: "plane")
     var touchingScreen = false
     var timer: Timer?
+    let music = SKAudioNode(fileNamed: "the-hero.mp3")
     
     let scoreLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
     var score = 0 {
@@ -44,6 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.categoryBitMask = 1
         
         addChild(player)
+        addChild(music)
         
         parallaxScroll(image: "sky", y: 0, z: -3, duration: 10, needsPhysics: false)
         parallaxScroll(image: "ground", y: -340, z: -1, duration: 6, needsPhysics: true)
@@ -161,7 +163,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             coin.physicsBody?.contactTestBitMask = 1
             
             coin.physicsBody?.isDynamic = false
-            coin.position.y = CGFloat.random(in: 300...600)
+            coin.position.y = CGFloat.random(in: 100...1000)
             coin.position.x = 768
             coin.name = "score"
             coin.run(action)
@@ -177,8 +179,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 explosion.position = player.position
                 addChild(explosion)
             }
+            run(SKAction.playSoundFileNamed("explosion.wav", waitForCompletion: false))
+            music.removeFromParent()
             player.removeFromParent()
         } else if node.name == "score" {
+            run(SKAction.playSoundFileNamed("score.wav", waitForCompletion: false))
             node.removeFromParent()
             score += 1
         }
