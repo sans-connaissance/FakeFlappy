@@ -43,6 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.position = CGPoint(x: -400, y: 250)
         
         player.physicsBody?.categoryBitMask = 1
+        player.physicsBody?.collisionBitMask = 0
         
         addChild(player)
         addChild(music)
@@ -96,7 +97,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let rotate = SKAction.rotate(toAngle: value, duration: 0.1)
         player.run(rotate)
         
+        if player.position.y > 300 {
+            player.position.y = 300
+        }
         
+//        if player.position.x != -400 {
+//            player.position.x = -400
+//        }
+
     }
     
     func parallaxScroll(image: String, y: CGFloat, z: CGFloat, duration: Double, needsPhysics: Bool) {
@@ -141,7 +149,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obstacle.position.x = 768
         addChild(obstacle)
         
-        
         //collision detection
         obstacle.physicsBody = SKPhysicsBody(texture: obstacle.texture!, size: obstacle.texture!.size())
         obstacle.physicsBody?.isDynamic = false
@@ -152,7 +159,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obstacle.position.y = CGFloat.random(in: -300..<350)
         
         // make it move across the screen
-        let action = SKAction.moveTo(x: -786, duration: 6)
+        let move = SKAction.moveTo(x: -768, duration: 6)
+        let remove = SKAction.removeFromParent()
+        let action = SKAction.sequence([move, remove])
+        
         obstacle.run(action)
         
         // can this be moved into its own function?? REFACTOR
