@@ -14,8 +14,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var touchingScreen = false
     var timer: Timer?
     
+    let scoreLabel = SKLabelNode(fontNamed: "Baskerville-Bold")
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "SCORE: \(score)"
+        }
+    }
+    
     override func didMove(to view: SKView) {
        
+        scoreLabel.fontColor = UIColor.black.withAlphaComponent(0.5)
+        scoreLabel.position.y = 320
+        addChild(scoreLabel)
+        score = 0
+        
         //this is the reference that begins physics collision detection
         physicsWorld.contactDelegate = self
         
@@ -140,6 +152,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // make it move across the screen
         let action = SKAction.moveTo(x: -786, duration: 6)
         obstacle.run(action)
+        
+        // can this be moved into its own function?? REFACTOR
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            let coin = SKSpriteNode(imageNamed: "coin")
+            coin.physicsBody = SKPhysicsBody(texture: coin.texture!, size: coin.texture!.size())
+            
+            coin.physicsBody?.contactTestBitMask = 1
+            
+            coin.physicsBody?.isDynamic = false
+            coin.position.y = CGFloat.random(in: 300...600)
+            coin.position.x = 768
+            coin.name = "score"
+            coin.run(action)
+            
+            self.addChild(coin)
+        }
     }
     
     func playerHit(_ node: SKNode) {
@@ -150,6 +178,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 addChild(explosion)
             }
             player.removeFromParent()
+        } else if node.name == "score" {
+            node.removeFromParent()
+            score += 1
         }
     }
     // this is required for the collision detection and physicsWorld stuff above
